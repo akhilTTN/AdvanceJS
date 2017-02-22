@@ -1,0 +1,45 @@
+function test() {
+console.log(a); //Line 1
+console.log(fun()); //Line2
+
+var a = 1;
+function fun() {
+return 2;
+}
+}
+
+test();
+
+Output
+
+undefined
+2
+
+Reason for this Question:
+
+this is a classic example of hosting.
+here at line 1 a was not in the picture but was declared and defined in later lines.
+stil we did not get any reference error due to the feature called hosting.
+it takes all the defination in the code and puts it in the biggining.
+so the above code becomes this
+
+function test() {
+var a;	//line 1
+console.log(a); //Line 2
+console.log(fun()); //Line3
+
+   a = 1;
+function fun() {
+return 2;
+}
+}
+
+test();
+
+now 'var a' has been declared before the using but is not defined so we get undefined rather than reference error.
+so line 2 prints undefined.
+now line 3 logs the function fun. but at the time of logging the function fun was called which returned value 2 so the console.log prints 2 and hence the output
+
+undefined
+2
+

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>google map</title>
+	<style type="text/css">
+		table tr td{
+			margin: 1px solid;
+			padding: 20px;
+		}
+	</style>
+</head>
+<body>
+<!-- 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
+	<script type="text/javascript">
+		google.maps.event.addDomListener(window,'load',intilize);
+		function intilize () {
+			// body... 
+			var autocomplete = new google.maps.places.Autocomplete(document.getElementById('txtautocomplete'));
+			google.maps.event.addListener(autocomplete,'place_changed',function(){
+				var place = autocomplete.getPlace();
+				var location = "<b>LOCATION: </b>" + place.formatted_address + "<br>";
+				location+= "<b>LATITUDE: </b>" + place.geometry.location.lat() + "<br>";
+				location+= "<b>LoNGITUDE: </b>" + place.geometry.location.lng() + "<br>";
+				document.getElementById('lblresult').innerHTML = location;
+			});
+			
+		};
+
+	</script> -->
+
+
+	<!-- <script src="https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452"></script> -->
+
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$.ajax({
+				url: 'https://maps.googleapis.com/maps/api/geocode/json?latlng=40.714224,-73.961452',
+				type: 'GET',
+				dataType: 'json',
+				data: {},
+				success: function (result) {
+        					var trHTML = '';
+        					$.each(result,function (i, item) {
+        						console.log(result.results[0].geometry);
+        						for(var x=0;x<item.length;x++){
+            				trHTML += '<tr><td>' + item[x].formatted_address + '</td><td>' + item[x].geometry.location.lat + '</td><td>' + item[x].geometry.location.lng + '</td></tr>';
+            					$('#records_table').append(trHTML);}
+        					});
+        					
+    					}
+			})
+			.done(function() {
+				console.log("succ");
+			})
+			.fail(function() {
+				console.log("error");
+			})
+			.always(function() {
+				console.log("complete");
+			});
+			
+		});
+	</script>
+	<!-- <span>Location:</span><input type="text" id="txtautocomplete" style="width: 200px" placeholder="Enter the address"><br><br> -->
+	<label id="lblresult"></label>
+	<table id="records_table" style="border: 1px solid;">
+	<tr>
+		<td>ADDRESS</td>
+		<td>LONGITUDE</td>
+		<td>LATITUDE</td>
+	</tr>
+	</table>
+</body>
+</html>

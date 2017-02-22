@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>heighest occuring string</title>
+</head>
+<body>
+<input type="text" id="strr">
+<input type="submit" onclick="fun()">
+
+<script type="text/javascript">
+	function fun () {
+		var tmp;
+		var ssss="";
+		var ar=new Array(256);
+	var str=document.getElementById("strr").value;
+	for(var i=0;i<256;i++){ar[i]=0;}
+	for(var i=0;i<str.length;i++)
+	{
+		var aa=str.charCodeAt(i);
+		tmp=ar[aa];
+		if(tmp==0){
+			tmp=tmp+1;
+			ssss+=str.charAt(i);
+			ar[aa]=tmp;
+		}
+		
+	}
+	alert("the string without any repeated character is  "+ssss);
+	}
+	
+</script>
+</body>
+</html>

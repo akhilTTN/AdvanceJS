@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>clock</title>
+</head>
+<body>
+
+<table>
+	<tr>
+		<td id="dc"></td>
+		<td id="dc_second"></td>
+		<td id="dc_hour"></td>
+	</tr>
+</table>
+
+
+
+<p>the clock will stop after 5 seconds. can be modified for 2 hours but then you will have to keep this running for 2 hours</p>
+<script type="text/javascript">
+
+	function digitized() {
+        var maxmin;
+        var dt = new Date();    
+        var hrs = dt.getHours();
+        var min = dt.getMinutes();
+        var sec = dt.getSeconds();
+
+        document.getElementById('dc').innerHTML = hrs + ":" + min;
+        document.getElementById('dc_second').innerHTML = sec;
+
+        if (hrs > 12) { 
+            document.getElementById('dc_hour').innerHTML = 'PM'; 
+        }
+        else { 
+            document.getElementById('dc_hour').innerHTML = 'AM'; 
+        }
+}
+        var time=setInterval('digitized()',1000);
+        setTimeout(function (){
+            clearInterval(time);
+                alert("time up");
+        },5000);
+                
+
+            
+</script>
+</body>
+</html>

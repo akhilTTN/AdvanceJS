@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>heighest occuring string</title>
+</head>
+<body>
+<input type="text" id="strr">
+<input type="submit" onclick="fun()">
+
+<script type="text/javascript">
+	function fun () {
+		var tmp;
+		var ar=new Array(256);
+	var str=document.getElementById("strr").value;
+	for(var i=0;i<256;i++){ar[i]=0;}
+	for(var i=0;i<str.length;i++)
+	{
+		var aa=str.charCodeAt(i);
+		//alert("ascii of "+str.charAt(i)+" is "+ aa);
+		tmp=ar[aa];
+		//alert("value at index "+aa+" is "+tmp);
+		tmp++;
+		//alert("after increment of temp "+tmp);
+		ar[aa]=tmp;
+		//var arrayvalue=ar[aa];
+		//alert("now array at location "+aa+" has value "+arrayvalue);
+	}
+	var max=0;
+	var ind;
+	for(var i=0;i<256;i++){
+		if(ar[i]>max)
+		{
+			max=ar[i];
+			ind=i;
+		}
+	}
+	//alert("value of max is" + ind);
+	var maxx=String.fromCharCode(ind);
+	alert("the highest occuring character is "+maxx);
+	}
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+var myObject = {
+foo: "bar",
+func: function() {
+var self = this;
+        console.log("outer func: this.foo = " + this.foo); //line1
+        console.log("outer func: self.foo = " + self.foo); //line2
+(function() {
+        console.log("inner func: this.foo = " + this.foo); //line3
+        console.log("inner func: self.foo = " + self.foo); //line4
+}());
+}
+};
+myObject.func();
+
+output
+
+outer func: this.foo = bar
+outer func: self.foo = bar
+inner func: this.foo = undefined
+inner func: self.foo = bar
+
+Reason for the output of this code snippet:-
+
+line 1
+
+'var self = this' line binds the foo key and its value bar to the current reference that is myObject.
+when we did 'console.log("outer func: this.foo = " + this.foo);' inside the myObject object, this here referd to the current object that is myObject and myObject has a property named foo so the value of foo was printed.
+
+line 2
+
+similarly when we did 'console.log("outer func: self.foo = " + self.foo);' self has the current reference that this has which is myObject. now we have two references to myObject. so here self.foo==this.foo==myObject.foo and so we have the value bar.
+
+but at line 3
+'console.log("inner func: this.foo = " + this.foo);' here this refers to the current object. but here we do not have any object in the annonymus function so this here referes to the window.
+so when we do this.foo it searches for the foo property in window object which is not there and hence we have the output undefined.
+
+at line 4
+'console.log("inner func: self.foo = " + self.foo);' self still referes to myObject and hence it searches for the foo property in myObject and we get bar as output
